@@ -1,6 +1,7 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { Vector3 } from 'three'
 
 /**
  * load images (texture)
@@ -35,35 +36,20 @@ const scene = new THREE.Scene()
 /**
  * Object
  */
-
-const objPosit = [
-    -1,0,1,
-    0,1,0,
-    0,0,0
-]
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ map: colorTexture })
-const mesh = new THREE.Mesh(geometry, material)
-mesh.position.x = objPosit[0]
-scene.add(mesh)
-
-const geometry2 = new THREE.BoxGeometry(1, 1, 1)
-const material2 = new THREE.MeshBasicMaterial({ map: colorTexture })
-const mesh2 = new THREE.Mesh(geometry2, material2)
-mesh2.position.x = objPosit[1]
-scene.add(mesh2)
-
-const geometry3 = new THREE.BoxGeometry(1, 1, 1)
-const material3 = new THREE.MeshBasicMaterial({ map: colorTexture })
-const mesh3 = new THREE.Mesh(geometry3, material3)
-mesh3.position.x = objPosit[2]
-scene.add(mesh3)
-
-const geometry4 = new THREE.BoxGeometry(1, 1, 1)
-const material4 = new THREE.MeshBasicMaterial({ map: colorTexture })
-const mesh4 = new THREE.Mesh(geometry4, material4)
-mesh4.position.y = objPosit[4]
-scene.add(mesh4)
+let mesh;
+const objPosit = [
+    {x:-1,y:0},{x:0,y:0},{x:1,y:0},
+    {x:-1,y:1},{x:0,y:1},{x:1,y:1},
+    {x:-1,y:2},{x:0,y:2},
+]
+const objs = objPosit.map((element) => {
+    mesh = new THREE.Mesh(geometry, material);
+    mesh.position.x = element.x
+    mesh.position.y = element.y
+    scene.add(mesh)
+})
 
 /**
  * Sizes
