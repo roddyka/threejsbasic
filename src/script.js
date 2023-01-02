@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { Vector3 } from 'three'
+import * as modelView from '@google/model-viewer'
 
 /**
  * load images (texture)
@@ -29,6 +30,8 @@ colorTexture.magFilter = THREE.NearestFilter
  */
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
+const modelViewer = document.querySelector("canvas.webgl");
+
 
 // Scene
 const scene = new THREE.Scene()
@@ -39,17 +42,36 @@ const scene = new THREE.Scene()
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ map: colorTexture })
 let mesh;
+const obj_number = document.querySelectorAll('input[type="checkbox"]').length;
+const obj_data = document.querySelectorAll('input[type="checkbox"]');
+// const objPosit = [];
+// for (let index = 0; index < obj_number; index++) {
+//     console.log(obj_data[index].value.toString())
+//     // const element = JSON.parse(obj_data[index].value);
+//     const element = obj_data[index].value;
+//     objPosit.push(element)
+// }
+/**
+ * @todo gerar blocos automaticamente pelo numero de inputs
+ * poder com a checkbox criar os desenhos
+ */
+// console.log(objPosit)
 const objPosit = [
     {x:-1,y:0},{x:0,y:0},{x:1,y:0},
     {x:-1,y:1},{x:0,y:1},{x:1,y:1},
-    {x:-1,y:2},{x:0,y:2},
+    {x:-1,y:2},{x:0,y:2},{x:1,y:2}
 ]
+
 const objs = objPosit.map((element) => {
+    // console.log(JSON.parse(element))
     mesh = new THREE.Mesh(geometry, material);
     mesh.position.x = element.x
     mesh.position.y = element.y
     scene.add(mesh)
 })
+
+//check the checkboxes
+// alert(obj_number);
 
 /**
  * Sizes
