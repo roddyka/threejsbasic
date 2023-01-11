@@ -13,6 +13,9 @@ const gui = new dat.GUI();
 //material texture
 const textureLoader = new THREE.TextureLoader()
 const matcapTexture = textureLoader.load('/textures/matcaps/4.png')
+const matcapTexture2 = textureLoader.load('/textures/matcaps/2.png')
+const matcapTexture3 = textureLoader.load('/textures/matcaps/3.png')
+const matcapTexture4 = textureLoader.load('/textures/matcaps/6.png') 
 const matcapTextureTorus = textureLoader.load('/textures/matcaps/7.png')
 
 /**
@@ -25,7 +28,7 @@ fontLoader.load('/fonts/SunnySpells_Regular.json',
 (font)=>{
     
     const textGeometry = new TextGeometry(
-        'Hello Benzinho!',
+        'Hello Linkedin!',
         {
             font:font,
             size: 0.5,
@@ -38,24 +41,17 @@ fontLoader.load('/fonts/SunnySpells_Regular.json',
             bevelSegments: 3
         }
     )
-    gui.add(textGeometry.parameters.options, 'size').min(0).max(1) 
-    gui.add(textGeometry.parameters.options, 'curveSegments').min(0).max(100)
-    gui.add(textGeometry.parameters.options, 'bevelEnabled')
-    gui.add(textGeometry.parameters.options, 'bevelThickness').min(0).max(100)
-    gui.add(textGeometry.parameters.options, 'bevelSize').min(0).max(100)
-    gui.add(textGeometry.parameters.options, 'bevelOffset').min(0).max(100)
-    gui.add(textGeometry.parameters.options, 'bevelSegments').min(0).max(100)
 
     const matcapMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture})
     textGeometry.center()
     const textMaterial = new THREE.MeshBasicMaterial({wireframe: false})
     const text = new THREE.Mesh(textGeometry, matcapMaterial)
+
     scene.add(text)
 
     const donutGeometry = new THREE.TorusBufferGeometry(0.3,0.3,20,45)
     const donutMaterial = new THREE.MeshMatcapMaterial({matcap:matcapTextureTorus})
         
-
     for (let index = 0; index < 100; index++) {
 
         const meshDonut = new THREE.Mesh(donutGeometry,donutMaterial)
@@ -71,6 +67,85 @@ fontLoader.load('/fonts/SunnySpells_Regular.json',
 
         scene.add(meshDonut)
     }
+})
+
+fontLoader.load('/fonts/Blue.json', 
+(font)=>{ 
+    console.log(font)
+    const textGeometry = new TextGeometry(
+        'Hello World!',
+        {
+            font:font,
+            size: 0.5,
+            height: 0.2,
+            curveSegments: 5,
+            bevelEnabled: true,
+            bevelThickness: 0.03,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 3
+        }
+    )
+
+    const matcapMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture2})
+    textGeometry.center()
+    const textMaterial2 = new THREE.MeshBasicMaterial({wireframe: false})
+    const text2 = new THREE.Mesh(textGeometry, matcapMaterial)
+    text2.position.y = 0.5
+    scene.add(text2)
+
+})
+
+fontLoader.load('/fonts/Drive.json', 
+(font)=>{
+    const textGeometry = new TextGeometry(
+        'Happy 2023!',
+        {
+            font:font,
+            size: 0.5,
+            height: 0.2,
+            curveSegments: 5,
+            bevelEnabled: true,
+            bevelThickness: 0.03,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 3
+        }
+    )
+
+    const matcapMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture3})
+    textGeometry.center()
+    const textMaterial2 = new THREE.MeshBasicMaterial({wireframe: false})
+    const text = new THREE.Mesh(textGeometry, matcapMaterial)
+    text.position.y = - 0.5
+    scene.add(text)
+
+})
+
+fontLoader.load('/fonts/Bilanta.json', 
+(font)=>{
+    const textGeometry = new TextGeometry(
+        'Have a nice week!',
+        {
+            font:font,
+            size: 0.5,
+            height: 0.2,
+            curveSegments: 10,
+            bevelEnabled: true,
+            bevelThickness: 0.03,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 10
+        }
+    )
+
+    const matcapMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture4})
+    textGeometry.center()
+    const textMaterial2 = new THREE.MeshBasicMaterial({wireframe: false})
+    const text = new THREE.Mesh(textGeometry, matcapMaterial)
+    text.position.y = - 1
+    scene.add(text)
+
 })
 
 /**
